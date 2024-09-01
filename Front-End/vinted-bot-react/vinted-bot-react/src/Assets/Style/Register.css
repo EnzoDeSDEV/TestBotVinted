@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Utiliser la hauteur de la fenêtre */
+    margin-top:  -150px;
+}
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #343A40;
+    width: 300px;/* Ajuster la largeur selon le besoin */
+    color: #FFFFFF; 
+}
+
+.Btn-register{
+    border-radius: 15px;
+    background-color: #343A40;
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+.register-form input {
+    margin-bottom: 15px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box; /* Inclure le padding dans la largeur totale */
+    border-radius: 15px;
+    border-color: #FFFFFF;
+}
+
+.register-form h2 {
+    margin-bottom: 20px;
+}
+
+.register-form label {
+    margin-bottom: 5px;
+}
