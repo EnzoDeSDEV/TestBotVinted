@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Assets/Style/BotSettings.css";
+import axios from 'axios';
 
 function BotSettings() {
+
   // État pour stocker le type d'article sélectionné
   const [selectedType, setSelectedType] = useState("");
 
@@ -19,6 +21,16 @@ function BotSettings() {
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
   };
+
+    const runBot = async () => {
+        try {
+            const response = await axios.post('http://localhost:9000/api/bot/run');
+            alert(response.data);
+        } catch (error) {
+            alert('An error occurred');
+        }
+    };
+
   return (
     <container>
       <div className="container-bot-settings">
@@ -47,7 +59,9 @@ function BotSettings() {
         <br />
       </div>
       <div className="container-btn">
-        <button className="Btn-Search"> Lancer la recherche</button>
+        <button className="Btn-Search" onClick={runBot}>
+          Lancer la recherche
+        </button>
       </div>
     </container>
   );
