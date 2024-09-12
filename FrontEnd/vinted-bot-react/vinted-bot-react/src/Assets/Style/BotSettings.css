@@ -15,6 +15,9 @@
     background-color: #343A40;
     width: 75%;/* Ajuster la largeur selon le besoin */
     color: #FFFFFF; 
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .ChooseTypeArticle{
@@ -57,3 +60,16 @@
     background-color: #e0e1e2;
     transition: 0.5s;
 }
+
+.price-range {
+    margin-top: 20px;
+  }
+  
+  .price-range label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .price-range input {
+    margin-bottom: 15px;
+  }
