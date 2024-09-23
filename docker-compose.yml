@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0          # Utilise la version MySQL que tu souhaites
+    container_name: my_mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword  # Mot de passe pour le root de MySQL
+      MYSQL_DATABASE: mydb                 # Nom de la base de données
+      MYSQL_USER: myuser                   # Utilisateur pour la base de données
+      MYSQL_PASSWORD: mypassword           # Mot de passe pour l'utilisateur
+    ports:
+      - "3306:3306"                        # Port MySQL exposé
+    volumes:
+      - mysqldata:/var/lib/mysql           # Volume pour stocker les données de la base
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: my_phpmyadmin
+    environment:
+      PMA_HOST: mysql                      # MySQL service hostname (le nom du conteneur MySQL)
+      PMA_USER: root                       # Utilisateur MySQL que tu veux utiliser dans phpMyAdmin
+      PMA_PASSWORD: myrootpassword         # Mot de passe pour root
+    ports:
+      - "8080:80"                          # Port exposé pour phpMyAdmin
+    depends_on:
+      - mysql                              # Attendre que MySQL soit prêt avant de lancer phpMyAdmin
+
+volumes:
+  mysqldata:

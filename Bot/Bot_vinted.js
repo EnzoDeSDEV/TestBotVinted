@@ -1,6 +1,8 @@
 const { Builder, Browser, By, until } = require('selenium-webdriver');
 
 const runSeleniumScript = async () => {
+
+  console.log("Scipt en cours éxécutions")
   let driver = await new Builder().forBrowser(Browser.CHROME).build();
   try {
     await driver.get('https://www.vinted.fr/');
@@ -15,6 +17,8 @@ const runSeleniumScript = async () => {
 
     await new Promise(resolve => setTimeout(resolve, 5000));
   } finally {
+
+    console.log("Script Arreter")
     await driver.quit();
   }
 };

@@ -8,8 +8,7 @@ function BotSettings() {
   const [selectedType, setSelectedType] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
-  const [inputValueMin, setInputValueMin] = useState("");
-  const [inputValueMax, setInputValueMax] = useState("");
+  const [inputPrice, setInputPrice] = useState("");
 
   // Tableau des types d'articles
   const articleTypes = ["Jean", "T-shirt", "Pull", "Chaussures"];
@@ -61,6 +60,7 @@ function BotSettings() {
       "45",
     ],
   };
+
   // Fonction pour gérer la sélection d'un type d'article
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
@@ -77,13 +77,8 @@ function BotSettings() {
     console.log("Marque sélectionnéée :", e.target.value);
   };
 
-  const handleInputMinChange = (e) => {
-    setInputValueMin(e.target.value);
-    console.log("Valeurs :", e.target.value);
-  };
-
-  const handleInputMaxChange = (e) => {
-    setInputValueMax(e.target.value);
+  const handleInputPriceChange = (e) => {
+    setInputPrice(e.target.value);
     console.log("Valeurs :", e.target.value);
   };
 
@@ -95,6 +90,30 @@ function BotSettings() {
       alert("An error occurred");
     }
   };
+
+  const sendDataToBackEnd = async() =>{
+    const userData = {
+      type: selectedType,
+      brand: selectedBrand,
+      size: selectedSize,
+      price: inputPrice
+    }
+
+    try{
+      const response = await axios.post("http://localhost:9000/api/bot/data", userData);
+      console.log("Données envoyé", response.data);
+      alert()
+    }catch (error){
+      console.log("Une erreur lors de la transaction des données est survenue",error)
+      alert("Erreur lors de l'envoie")
+    }
+  };
+
+    // Fonction qui combine le lancement du bot et l'envoi des données
+    const handleRunBotAndSendData = async () => {
+      await sendDataToBackEnd();  // Envoie des données d'abord
+      await runBot();  // Lance le bot ensuite
+    };
 
   return (
     <container>
@@ -130,7 +149,7 @@ function BotSettings() {
           {/* Sélection de la marque */}
           <select
             className="ChooseBrandsArticle"
-            onChange={handleSizeChange} // Ajout du gestionnaire d'événements
+            onChange={(handleSizeChange)} // Ajout du gestionnaire d'événements
             value={selectedSize}
           >
             <option value="">Sélectionnez une taille</option>
@@ -143,28 +162,19 @@ function BotSettings() {
           </select>
 
           {/* Sélection de la valeurs min */}
-          <label>Valeur minimale:</label>
+          <label>Prix :</label>
           <input
             type="text"
             placeholder="...€"
-            value={inputValueMin}
-            onChange={handleInputMinChange}
-          />
-
-          {/* Sélection de la valeurs max */}
-          <label>Valeur maximal:</label>
-          <input
-            type="text"
-            placeholder="...€"
-            value={inputValueMax}
-            onChange={handleInputMaxChange}
+            value={inputPrice}
+            onChange={handleInputPriceChange}
           />
         </form>
         <br />
       </div>
 
       <div className="container-btn">
-        <button className="Btn-Search" onClick={runBot}>
+        <button className="Btn-Search" onClick={handleRunBotAndSendData}>
           Lancer la recherche
         </button>
       </div>

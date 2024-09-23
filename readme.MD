@@ -4,7 +4,15 @@
  pour lancer selenium < python3 [suivis du nom du script]>
 
  # React
- pour lancer react <npm start> dans le dossier frontend
+ pour lancer react < npm start> dans le dossier frontend
+
+ # Docker
+
+ docker start < nom du conteneur > lancer le conteneur 
+
+ docker ps liste les docker lancer 
+
+ docker stop < nom du conteneur > arrêt du conteneur 
 
  # Tache
 
